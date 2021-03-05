@@ -13,6 +13,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext"
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -26,7 +27,7 @@ const validationSchema = yup.object({
   username: yup
     .string("Enter username")
     .min(3, "Username should be of minimum 3 characters in length")
-    .required("Usernmae is required"),
+    .required("Username is required"),
   email: yup
     .string("Enter email")
     .email("Enter a valid email")
@@ -41,6 +42,8 @@ const validationSchema = yup.object({
 });
 
 const SignupForm = () => {
+  
+  const { signup } = useAuth();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -49,10 +52,14 @@ const SignupForm = () => {
       confirmPassword: "",
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
+
+      await signup(values.email, values.password);
     },
   });
+  
+
   return (
     <ContainerBox>
       <Grid>

@@ -9,15 +9,15 @@ export default function Signup() {
     const { signup } = useAuth();
     const [error, setError] = useState("")
 
-    async function handlePrevent(e) {
-        e.preventDefault();
+    // async function handlePrevent(e) {
+    //     e.preventDefault();
 
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            setError("Passwords do not match")
-        }
+    //     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    //         setError("Passwords do not match")
+    //     }
         
-        await signup(emailRef.current.value, passwordRef.current.value);
-    }
+    //     await signup(emailRef.current.value, passwordRef.current.value);
+    // }
 
     return (
         <>
