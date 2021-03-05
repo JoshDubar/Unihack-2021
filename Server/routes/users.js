@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
   res.send('logging in user');
 });
 
+//Make new user
 router.post('/', usersController.RegisterUser);
 
 module.exports = router;
