@@ -42,7 +42,7 @@ const validationSchema = yup.object({
 });
 
 const SignupForm = () => {
-  
+  const [loading, setLoading] = useState(false)
   const { signup } = useAuth();
   const formik = useFormik({
     initialValues: {
@@ -56,6 +56,7 @@ const SignupForm = () => {
       alert(JSON.stringify(values, null, 2));
 
       await signup(values.email, values.password);
+      setLoading(false);
     },
   });
   
@@ -147,6 +148,7 @@ const SignupForm = () => {
                 />
               </Box>
               <Button
+                disabled={loading}
                 type="submit"
                 fullWidth
                 className="login-button"
