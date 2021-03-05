@@ -71,8 +71,7 @@ const SignupForm = () => {
             </Avatar>
             <Typography
               variant="h1"
-              style={{ fontSize: "2em", fontWeight: 200, marginTop: "1rem" }}
-              weight
+              style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
             >
               Sign Up
             </Typography>

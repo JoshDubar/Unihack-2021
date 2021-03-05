@@ -1,17 +1,23 @@
 import "./App.css";
-
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
 import LoginForm from "./components/LoginForm/LoginForm";
 import SignupForm from "./components/SignupForm/SignupForm";
+import Prrty from "./components/Prrty/Prrty";
+import theme from "./theme";
+
 function App() {
   return (
-    <Router>
-      <div>
-        {/* <Route path="/" component={LoginForm} /> */}
-        <Route path="/login" component={LoginForm} />
-        <Route path="/signup" component={SignupForm} />
-      </div>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Box height="100vh">
+          <Route path="/login" component={LoginForm} />
+          <Route path="/signup" component={SignupForm} />
+          <Route path="/" component={Prrty} />
+        </Box>
+      </Router>
+    </ThemeProvider>
   );
 }
 

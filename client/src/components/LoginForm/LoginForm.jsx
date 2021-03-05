@@ -24,6 +24,7 @@ const LoginForm = () => {
     <ContainerBox>
       <Grid>
         <Paper
+          color="primary"
           elevation={10}
           style={{
             height: "100%",
@@ -38,8 +39,7 @@ const LoginForm = () => {
             </Avatar>
             <Typography
               variant="h1"
-              style={{ fontSize: "2em", fontWeight: 200, marginTop: "1rem" }}
-              weight
+              style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
             >
               Sign In
             </Typography>
