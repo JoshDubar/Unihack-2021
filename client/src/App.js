@@ -1,15 +1,17 @@
-import './App.css';
-import Signup from './components/Signup';
-import React from "react"
-import { Container } from "react-bootstrap"
+import "./App.css";
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import LoginForm from "./components/LoginForm/LoginForm";
+import SignupForm from "./components/SignupForm/SignupForm";
 function App() {
   return (
-    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
-      <div className="w-100" style={{ maxWidth: "400px" }}>
-        <Signup />
+    <Router>
+      <div>
+        {/* <Route path="/" component={LoginForm} /> */}
+        <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignupForm} />
       </div>
-    </Container>
+    </Router>
   );
 }
 
