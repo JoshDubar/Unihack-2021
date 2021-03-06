@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+import { AuthProvider } from "./contexts/AuthContext";
+import LoginForm from "./components/LoginForm/LoginForm";
+import SignupForm from "./components/SignupForm/SignupForm";
+import InviteForm from "./components/InviteForm/InviteForm";
+import PrrtyHome from "./components/Prrty/PrrtyHome";
+import theme from "./theme";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Box height="100vh">
+            <Route path="/login" component={LoginForm} />
+            <Route path="/signup" component={SignupForm} />
+            <Route path="/invite/:id" component={InviteForm} />
+            <Route path={["/", "/home"]} component={PrrtyHome} />
+          </Box>
+        </Router>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
