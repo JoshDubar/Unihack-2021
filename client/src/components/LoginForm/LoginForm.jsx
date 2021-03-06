@@ -11,6 +11,7 @@ import {
 import styled from "styled-components";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext"
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -20,6 +21,7 @@ const ContainerBox = styled(Box)`
   height: 100vh;
 `;
 const LoginForm = () => {
+  const { login } = useAuth()
   return (
     <ContainerBox>
       <Grid>
