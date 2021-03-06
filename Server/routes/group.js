@@ -15,4 +15,7 @@ router.post('/addMember', groupController.AddMember);
 //Member has made a payment
 router.patch('/paymentMade', groupController.PaymentMade);
 
+//Changing the amount to paid
+router.patch('/amountToPay', groupController.EditAmountToPay);
+
 module.exports = router;
