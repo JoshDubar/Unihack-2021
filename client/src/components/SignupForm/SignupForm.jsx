@@ -53,10 +53,15 @@ const SignupForm = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      alert(JSON.stringify(values, null, 2));
+      try {
+        alert(JSON.stringify(values, null, 2));
 
-      await signup(values.email, values.password);
-      setLoading(false);
+        await signup(values.email, values.password);
+        setLoading(false);
+      }
+      catch {
+        console.log("error");
+      }
     },
   });
   
