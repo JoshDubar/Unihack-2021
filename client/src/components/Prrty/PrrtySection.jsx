@@ -1,21 +1,24 @@
 import React from "react";
 import { Box, Typography, styled } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import PrrtyBox from "./PrrtyBox";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
 const StyledScrollBar = styled(PerfectScrollbar)`
-  color: secondary.main;
-  background: #fa448c;
+  color: ${(props) => props.theme.palette.secondary.main};
+  background: ${(props) => props.theme.palette.primary.main};
   & .ps__thumb-y,
   .ps__thumb-y:hover {
-    background-color: secondary;
+    background-color: ${(props) => props.theme.palette.secondary.main};
   }
 `;
 
 const PrrtySection = () => {
+  const theme = useTheme();
+  console.log(theme);
   return (
-    <StyledScrollBar options={{ suppressScrollX: true }}>
+    <StyledScrollBar theme={theme} options={{ suppressScrollX: true }}>
       <Box
         id="your-prrties"
         width="100%"

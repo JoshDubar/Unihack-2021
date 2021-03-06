@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography, Avatar } from "@material-ui/core";
-
+import { useTheme } from "@material-ui/core/styles";
 import Logo from "../../images/LogoYellow.png";
 import styled from "styled-components";
 import PrrtySection from "./PrrtySection";
@@ -9,10 +9,11 @@ const LogoImage = styled.img`
   width: 100%;
 `;
 const Prrty = () => {
+  const theme = useTheme();
   return (
     <Box
       display="flex"
-      bgcolor="#fa448c"
+      bgcolor={theme.palette.primary.main}
       height="calc(100vh - 2rem)"
       width="250px"
       flexDirection="column"
@@ -20,8 +21,8 @@ const Prrty = () => {
       padding="1rem"
     >
       <LogoImage src={Logo} alt="logo" />
-      <Box color="secondary" position="relative" top="-0.5rem">
-        <Typography>
+      <Box position="relative" top="-0.5rem">
+        <Typography style={{ color: theme.palette.text.dark }}>
           <i>The new way to share!</i>
         </Typography>
       </Box>
@@ -32,7 +33,11 @@ const Prrty = () => {
         alignItems="center"
         marginBottom="1.5rem"
       >
-        <Avatar style={{ backgroundColor: "#333", zIndex: 1 }}>J</Avatar>
+        <Avatar
+          style={{ backgroundColor: theme.palette.avatar.main, zIndex: 1 }}
+        >
+          J
+        </Avatar>
         <Box
           bgcolor="white"
           width="8rem"

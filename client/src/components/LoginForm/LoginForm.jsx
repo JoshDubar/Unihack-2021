@@ -11,6 +11,7 @@ import {
 import styled from "styled-components";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
+import { useTheme } from "@material-ui/core/styles";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -20,17 +21,17 @@ const ContainerBox = styled(Box)`
   height: 100vh;
 `;
 const LoginForm = () => {
+  const theme = useTheme();
   return (
     <ContainerBox>
       <Grid>
         <Paper
-          color="primary"
           elevation={10}
           style={{
             height: "100%",
             width: "280px",
             padding: "3rem",
-            color: "#fa448c",
+            color: theme.palette.primary.main,
           }}
         >
           <Grid align="center">

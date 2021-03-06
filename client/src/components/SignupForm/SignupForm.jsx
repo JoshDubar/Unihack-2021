@@ -7,6 +7,7 @@ import {
   TextField,
   Box,
   Button,
+  useTheme,
 } from "@material-ui/core";
 import styled from "styled-components";
 import { useFormik } from "formik";
@@ -41,6 +42,7 @@ const validationSchema = yup.object({
 });
 
 const SignupForm = () => {
+  const theme = useTheme();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -62,7 +64,7 @@ const SignupForm = () => {
             height: "100%",
             width: "280px",
             padding: "3rem",
-            color: "#fa448c",
+            color: theme.palette.primary.main,
           }}
         >
           <Grid align="center">
