@@ -4,7 +4,6 @@ import { Box, Typography, TextField, Button } from "@material-ui/core";
 import PrrtySidebar from "../Prrty/PrrtySidebar";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import "./Group.css";
 import { useTheme } from "@material-ui/core/styles";
 import InputAdornment from '@material-ui/core/InputAdornment';
 
@@ -196,22 +195,13 @@ const GroupCreate = () => {
               />
             </DetailBox>
           </TitleBox>
-          <TitleBox display="flex" flexDirection="row">
+          <TitleBox style ={{ textAlign: "center"}}>
             <Button
               color="primary"
               type="submit"
+              variant="contained"
               fullWidth
-              className="transaction-button"
-              style={{ marginTop: "1rem" }}
-            >
-              Add Transaction
-            </Button>
-            <Button
-              color="primary"
-              type="submit"
-              fullWidth
-              className="party-share-button"
-              style={{ marginTop: "1rem" }}
+              style={{ width:"20rem", marginTop: "1rem", height: "3rem", borderRadius: "9999"}}
             >
               Start Sharing!
             </Button>
