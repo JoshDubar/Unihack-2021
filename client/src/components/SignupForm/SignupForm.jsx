@@ -68,7 +68,7 @@ const SignupForm = () => {
   });
 
   return (
-    <ContainerBox>
+    <ContainerBox bgcolor={theme.palette.primary.main}>
       <Grid>
         <Paper
           elevation={10}

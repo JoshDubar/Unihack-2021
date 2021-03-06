@@ -3,13 +3,17 @@ import {
   Grid,
   Paper,
   Typography,
-  Avatar,
   Box,
   Button,
 } from "@material-ui/core";
 import styled from "styled-components";
-import PeopleIcon from "@material-ui/icons/People";
-import { Link } from "react-router-dom";
+import Logo from "../../images/LogoYellow.png";
+import { useTheme } from "@material-ui/core/styles";
+// import { Link } from "react-router-dom";
+
+const LogoImage = styled.img`
+  width: 100%;
+`;
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -21,8 +25,9 @@ const ContainerBox = styled(Box)`
 const InviteForm = () => {
   const value = "Joshua"
   const groupName = "Yep Code"
+  const theme = useTheme();
   return (
-    <ContainerBox>
+    <ContainerBox bgcolor={theme.palette.primary.main}>
       <Grid>
         <Paper
           elevation={10}
@@ -30,13 +35,11 @@ const InviteForm = () => {
             height: "100%",
             width: "280px",
             padding: "3rem",
-            color: "#fa448c",
+            color: theme.palette.primary.main,
           }}
         >
           <Grid align="center">
-            <Avatar>
-              <PeopleIcon />
-            </Avatar>
+            <LogoImage src={Logo} alt="logo" />
             <Box style={{ marginTop: "1rem" }}>
               <Typography
                 variant="h1"
@@ -54,10 +57,10 @@ const InviteForm = () => {
               </Typography>
             </Box>
             <Button
+              color="secondary"
               variant="contained"
               type="submit"
               fullWidth
-              className="login-button"
               style={{ marginTop: "1rem" }}
             >
               Accept Invite
@@ -66,7 +69,7 @@ const InviteForm = () => {
         </Paper>
       </Grid>
     </ContainerBox>
-  );
+  )
 };
 
 export default InviteForm;
