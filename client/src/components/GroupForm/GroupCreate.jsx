@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 import { Box, Typography, TextField, Button } from "@material-ui/core";
 import PrrtySidebar from "../Prrty/PrrtySidebar";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTheme } from "@material-ui/core/styles";
-import InputAdornment from '@material-ui/core/InputAdornment';
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 const validationSchema = yup.object({
   groupName: yup
@@ -20,7 +20,8 @@ const validationSchema = yup.object({
     .required("BSB Number is required"),
   bankNumber: yup
     .string("Bank Account Number")
-    .min(8, "Bank Account Number should be of minimum 8 characters in length")
+    .min(16, "Bank Account Number should be 16 characters in length")
+    .max(16, "Bank Account Number should be 16 characters in length")
     .required("Bank Account Number is required"),
   transactionName: yup
     .string("Enter a name for your transaction")
@@ -30,17 +31,16 @@ const validationSchema = yup.object({
     .number("Enter a transaction value")
     .moreThan(0, "Transaction value should be more than $0")
     .required("Transaction value is required"),
-  transactionDueDate: yup
-    .date("Enter a transaction due date")
+  transactionDueDate: yup.date("Enter a transaction due date"),
 });
 
 const TitleBox = styled(Box)`
-  margin: 3rem;
-`
+  margin: 2rem;
+`;
 
 const DetailBox = styled(Box)`
-  margin: 0.2rem;
-`
+  margin: 0.5rem 0 0 0.2rem;
+`;
 
 const GroupCreate = () => {
   const theme = useTheme();
@@ -66,18 +66,24 @@ const GroupCreate = () => {
       <Box width="100%">
         <form onSubmit={formik.handleSubmit}>
           <TitleBox>
-            <Typography 
+            <Typography
               variant="h2"
-              style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
+              style={{
+                fontSize: "2em",
+                fontWeight: "bold",
+                marginTop: "0.5rem",
+              }}
             >
               What's your PRRTY name?
             </Typography>
-            <TextField 
+            <TextField
               id="groupName"
-              label="PRRTY Name" 
+              label="PRRTY Name"
               value={formik.values.groupName}
               onChange={formik.handleChange}
-              error={formik.touched.groupName && Boolean(formik.errors.groupName)}
+              error={
+                formik.touched.groupName && Boolean(formik.errors.groupName)
+              }
               helperText={formik.touched.groupName && formik.errors.groupName}
               style={{ marginTop: "0.75rem", width: "50%" }}
               fullWidth
@@ -85,7 +91,7 @@ const GroupCreate = () => {
             />
           </TitleBox>
           <TitleBox>
-            <Typography 
+            <Typography
               variant="h2"
               style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
             >
@@ -93,16 +99,14 @@ const GroupCreate = () => {
             </Typography>
             <DetailBox>
               <TextField
-                style={{ width: "15%", marginTop: "2rem"}}
+                style={{ width: "15%" }}
                 label="BSB Number"
                 type="text"
                 placeholder="BSB Number"
                 id="bankBSB"
                 value={formik.values.bankBSB}
                 onChange={formik.handleChange}
-                error={
-                  formik.touched.bankBSB && Boolean(formik.errors.bankBSB)
-                }
+                error={formik.touched.bankBSB && Boolean(formik.errors.bankBSB)}
                 helperText={formik.touched.bankBSB && formik.errors.bankBSB}
                 fullWidth
                 required
@@ -110,7 +114,7 @@ const GroupCreate = () => {
             </DetailBox>
             <DetailBox>
               <TextField
-                style={{ marginTop: "0.75rem", width: "40%"}}
+                style={{ marginTop: "0.75rem", width: "40%" }}
                 label="Bank Account Number"
                 type="text"
                 placeholder="Bank Account Number"
@@ -120,7 +124,9 @@ const GroupCreate = () => {
                 error={
                   formik.touched.bankNumber && Boolean(formik.errors.bankNumber)
                 }
-                helperText={formik.touched.bankNumber && formik.errors.bankNumber}
+                helperText={
+                  formik.touched.bankNumber && formik.errors.bankNumber
+                }
                 fullWidth
                 required
               />
@@ -128,14 +134,14 @@ const GroupCreate = () => {
           </TitleBox>
           <TitleBox>
             <div>
-              <Typography 
+              <Typography
                 variant="h2"
-                style={{ 
-                  fontSize: "2em", 
-                  fontWeight: "bold", 
-                  marginTop: "1rem", 
+                style={{
+                  fontSize: "2em",
+                  fontWeight: "bold",
+                  marginTop: "1rem",
                   marginRight: "1rem",
-                  display: "inline", 
+                  display: "inline",
                 }}
               >
                 What will you be sharing?
@@ -144,7 +150,7 @@ const GroupCreate = () => {
             </div>
             <DetailBox>
               <TextField
-                style={{ marginTop: "0.75rem", width: "40%"}}
+                style={{ marginTop: "0.75rem", width: "40%" }}
                 label="Transaction Name"
                 type="text"
                 placeholder="Transaction Name"
@@ -152,17 +158,23 @@ const GroupCreate = () => {
                 value={formik.values.transactionName}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.transactionName && Boolean(formik.errors.transactionName)
+                  formik.touched.transactionName &&
+                  Boolean(formik.errors.transactionName)
                 }
-                helperText={formik.touched.transactionName && formik.errors.transactionName}
+                helperText={
+                  formik.touched.transactionName &&
+                  formik.errors.transactionName
+                }
                 fullWidth
                 required
               />
             </DetailBox>
             <DetailBox>
               <TextField
-                startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                style={{ marginTop: "0.75rem", width: "40%"}}
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                style={{ marginTop: "0.75rem", width: "40%" }}
                 label="Transaction Value"
                 type="number"
                 placeholder="Transaction Value"
@@ -170,16 +182,20 @@ const GroupCreate = () => {
                 value={formik.values.transactionValue}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.transactionValue && Boolean(formik.errors.transactionValue)
+                  formik.touched.transactionValue &&
+                  Boolean(formik.errors.transactionValue)
                 }
-                helperText={formik.touched.transactionValue && formik.errors.transactionValue}
+                helperText={
+                  formik.touched.transactionValue &&
+                  formik.errors.transactionValue
+                }
                 fullWidth
                 required
               />
             </DetailBox>
             <DetailBox>
               <TextField
-                style={{ marginTop: "0.75rem", width: "40%"}}
+                style={{ marginTop: "0.75rem", width: "40%" }}
                 type="date"
                 label="Due Date"
                 InputLabelProps={{ shrink: true }}
@@ -187,25 +203,34 @@ const GroupCreate = () => {
                 value={formik.values.transactionDueDate}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.transactionDueDate && Boolean(formik.errors.transactionDueDate)
+                  formik.touched.transactionDueDate &&
+                  Boolean(formik.errors.transactionDueDate)
                 }
-                helperText={formik.touched.transactionDueDate && formik.errors.transactionDueDate}
+                helperText={
+                  formik.touched.transactionDueDate &&
+                  formik.errors.transactionDueDate
+                }
                 fullWidth
                 required
               />
             </DetailBox>
           </TitleBox>
-          <TitleBox style ={{ textAlign: "center"}}>
+          <Box style={{ margin: "1rem 0 0 2rem" }}>
             <Button
               color="primary"
               type="submit"
               variant="contained"
               fullWidth
-              style={{ width:"20rem", marginTop: "1rem", height: "3rem", borderRadius: "9999"}}
+              style={{
+                width: "20rem",
+                marginTop: "1rem",
+                height: "3rem",
+                borderRadius: "9999",
+              }}
             >
               Start Sharing!
             </Button>
-          </TitleBox>
+          </Box>
         </form>
       </Box>
     </Box>
