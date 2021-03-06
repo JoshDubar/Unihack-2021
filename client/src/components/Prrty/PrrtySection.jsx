@@ -24,18 +24,31 @@ const PrrtySection = () => {
         width="100%"
         display="flex"
         flexDirection="column"
-        margin="0 0 0 2rem"
         alignItems="flex-start"
         color="white"
       >
         <Typography style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
           YOUR PRRTIES
         </Typography>
-        <Box>
-          {[1, 2, 3, 4, 5, 6, 7].map((val) => (
-            <PrrtyBox />
-          ))}
-        </Box>
+        {false ? (
+          <Typography
+            style={{
+              margin: "1rem 0 0 0",
+              whiteSpace: "wrap",
+              overflow: "hidden",
+              fontSize: "0.8rem",
+              fontWeight: "bold",
+            }}
+          >
+            You're not in any PRRTIES yet!
+          </Typography>
+        ) : (
+          <Box>
+            {[1, 2, 3, 4, 5, 6, 7].map((val) => (
+              <PrrtyBox />
+            ))}
+          </Box>
+        )}
       </Box>
     </StyledScrollBar>
   );
