@@ -26,7 +26,7 @@ const PrrtyGroupMember = ({ user }) => {
         </Typography>
       </Box>
       <Box justifySelf="flex-end" paddingRight="1rem">
-        <Typography>$4.00</Typography>
+        <Typography style={{ color: "mediumseagreen" }}>$4.00</Typography>
       </Box>
     </Box>
   );
