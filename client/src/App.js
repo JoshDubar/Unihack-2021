@@ -17,7 +17,7 @@ function App() {
           <Box height="100vh">
             <Route path="/login" component={LoginForm} />
             <Route path="/signup" component={SignupForm} />
-            <Route path={["/", "/home"]} component={PrrtyHome} />
+            <Route path={"/home"} component={PrrtyHome} />
           </Box>
         </Router>
       </ThemeProvider>

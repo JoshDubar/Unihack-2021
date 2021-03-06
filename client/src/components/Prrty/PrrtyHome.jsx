@@ -1,11 +1,12 @@
 import React from "react";
 import { Box } from "@material-ui/core";
 import PrrtySidebar from "./PrrtySidebar";
+import PrrtyGroup from "./PrrtyGroup";
 const PrrtyHome = () => {
   return (
-    <Box>
+    <Box display="flex" flexDirection="row">
       <PrrtySidebar />
-      <Box width="100%" />
+      <PrrtyGroup />
     </Box>
   );
 };
