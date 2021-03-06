@@ -22,10 +22,10 @@ const PrrtyBox = () => {
           margin: "0.3rem",
           width: "4.5rem",
           height: "4.5rem",
-          backgroundColor: theme.palette.avatar.main,
+          backgroundColor: theme.palette.primary.main,
         }}
       >
-        J
+        P
       </Avatar>
       <Box color="black" marginLeft="0.5rem">
         <Typography style={{ fontSize: "0.8rem" }}>Prrty Group Name</Typography>
