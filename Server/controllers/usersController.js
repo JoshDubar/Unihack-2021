@@ -1,17 +1,35 @@
 const User = require('../models/User');
+const Group = require('../models/Group');
 
-exports.RegisterUser = function(req,res) {
+exports.RegisterUser = async function(req,res) {
     const user = new User({
         email: req.body.email,
-        password: req.body.password
+        groups : [],
+        UID : "demo_id",
+        username : req.body.username
       });
-    
-    user.save()
-    .then(data => {
-        res.json(data);
-    })
-    .catch(err => {
-        res.json({message : err})
-    })
-}
+
+    try{
+        const savedUser = await user.save();
+        res.json(savedUser);
+    } catch (err){
+        res.json({message : err});
+    }
+};
+
+//Returning all the groups the user is in
+exports.ReturnAllGroups = async function(req,res){
+    const userID = req.params.id
+    try{
+        const userGroups = await User.findById(userID);
+        res.json(userGroups.groups);
+    }
+    catch(err){
+        res.json({message : err});
+    }
+};
+
+
+
+
 
