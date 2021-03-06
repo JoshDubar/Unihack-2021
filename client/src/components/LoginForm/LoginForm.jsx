@@ -12,6 +12,7 @@ import styled from "styled-components";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -22,6 +23,7 @@ const ContainerBox = styled(Box)`
 `;
 const LoginForm = () => {
   const theme = useTheme();
+  const { login } = useAuth();
   return (
     <ContainerBox>
       <Grid>
