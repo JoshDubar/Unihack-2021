@@ -5,6 +5,7 @@ import { Box } from "@material-ui/core";
 import { AuthProvider } from "./contexts/AuthContext";
 import LoginForm from "./components/LoginForm/LoginForm";
 import SignupForm from "./components/SignupForm/SignupForm";
+import InviteForm from "./components/InviteForm/InviteForm";
 import PrrtyHome from "./components/Prrty/PrrtyHome";
 import Home from "./components/Home";
 import theme from "./theme";
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" component={LoginForm} />
             <Route path="/signup" component={SignupForm} />
             <Route path="/home" component={PrrtyHome} />
+            <Route path="/invite/:id" component={InviteForm} />
           </Box>
         </Router>
       </ThemeProvider>

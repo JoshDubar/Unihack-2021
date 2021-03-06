@@ -9,6 +9,10 @@ router.get('/', function(req, res, next) {
   res.send('logging in user');
 });
 
+//Make new user
 router.post('/', usersController.RegisterUser);
+
+//Return all the groups for a user
+router.get('/:id',usersController.ReturnAllGroups);
 
 module.exports = router;
