@@ -11,7 +11,8 @@ import {
 import styled from "styled-components";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext"
+import { useTheme } from "@material-ui/core/styles";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -21,7 +22,8 @@ const ContainerBox = styled(Box)`
   height: 100vh;
 `;
 const LoginForm = () => {
-  const { login } = useAuth()
+  const theme = useTheme();
+  const { login } = useAuth();
   return (
     <ContainerBox>
       <Grid>
@@ -31,7 +33,7 @@ const LoginForm = () => {
             height: "100%",
             width: "280px",
             padding: "3rem",
-            color: "#fa448c",
+            color: theme.palette.primary.main,
           }}
         >
           <Grid align="center">
@@ -40,8 +42,7 @@ const LoginForm = () => {
             </Avatar>
             <Typography
               variant="h1"
-              style={{ fontSize: "2em", fontWeight: 200, marginTop: "1rem" }}
-              weight
+              style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
             >
               Sign In
             </Typography>

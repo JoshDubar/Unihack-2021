@@ -7,13 +7,14 @@ import {
   TextField,
   Box,
   Button,
+  useTheme,
 } from "@material-ui/core";
 import styled from "styled-components";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext"
+import { useAuth } from "../../contexts/AuthContext";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -42,7 +43,8 @@ const validationSchema = yup.object({
 });
 
 const SignupForm = () => {
-  const [loading, setLoading] = useState(false)
+  const theme = useTheme();
+  const [loading, setLoading] = useState(false);
   const { signup } = useAuth();
   const formik = useFormik({
     initialValues: {
@@ -64,7 +66,6 @@ const SignupForm = () => {
       }
     },
   });
-  
 
   return (
     <ContainerBox>
@@ -75,7 +76,7 @@ const SignupForm = () => {
             height: "100%",
             width: "280px",
             padding: "3rem",
-            color: "#fa448c",
+            color: theme.palette.primary.main,
           }}
         >
           <Grid align="center">
@@ -84,8 +85,7 @@ const SignupForm = () => {
             </Avatar>
             <Typography
               variant="h1"
-              style={{ fontSize: "2em", fontWeight: 200, marginTop: "1rem" }}
-              weight
+              style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
             >
               Sign Up
             </Typography>
