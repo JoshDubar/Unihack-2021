@@ -16,7 +16,8 @@ const MembersSchema = mongoose.Schema({
         type : Boolean,
         default : false
     },
-    _id : String
+    _id : String,
+    amountToPay : Number
 });
 
 const GroupSchema = mongoose.Schema({
