@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { AuthProvider } from "./contexts/AuthContext";
+import history from "./history/history"
 import LoginForm from "./components/LoginForm/LoginForm";
 import SignupForm from "./components/SignupForm/SignupForm";
 import InviteForm from "./components/InviteForm/InviteForm";
@@ -15,7 +16,7 @@ function App() {
   return (
     <AuthProvider>
       <ThemeProvider theme={theme}>
-        <Router>
+        <Router history={history}>
           <Box height="100vh">
             <Route exact path="/" component={Home} />
             <Route path="/login" component={LoginForm} />
