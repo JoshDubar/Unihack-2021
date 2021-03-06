@@ -5,7 +5,7 @@ exports.RegisterUser = async function(req,res) {
     const user = new User({
         email: req.body.email,
         groups : [],
-        UID : "demo_id",
+        _id : req.body.userId,
         username : req.body.username
       });
 
@@ -17,9 +17,22 @@ exports.RegisterUser = async function(req,res) {
     }
 };
 
+exports.ReturnUserData = async function(req,res) {
+    console.log("test2");
+    const userId = req.body.userId;
+    try {
+        console.log("test");
+        const user = await User.findById(userId);
+        res.json(user)
+        
+    } catch(err){
+        res.json({message: err});
+    };
+};
+
 //Returning all the groups the user is in
 exports.ReturnAllGroups = async function(req,res){
-    const userID = req.params.id
+    const userID = req.body.userId;
     try{
         const userGroups = await User.findById(userID);
         res.json(userGroups.groups);

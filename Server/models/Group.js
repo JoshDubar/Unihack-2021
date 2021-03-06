@@ -16,7 +16,7 @@ const MembersSchema = mongoose.Schema({
         type : Boolean,
         default : false
     },
-    _id : mongoose.Schema.Types.ObjectID
+    _id : String
 });
 
 const GroupSchema = mongoose.Schema({
