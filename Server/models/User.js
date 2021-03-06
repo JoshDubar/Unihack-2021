@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const groupSchema = mongoose.Schema({
     name: String,
-    _id: mongoose.Schema.Types.ObjectID,
+    _id: String,
     isHost: {
         type: Boolean,
         default: false  
@@ -13,7 +13,7 @@ const UserSchema = mongoose.Schema({
     username: String,
     email: String,
     groups : [groupSchema],
-    UID : String,
+    _id : String,
     
 });
 
