@@ -27,7 +27,13 @@ const PrrtySection = () => {
         alignItems="flex-start"
         color="white"
       >
-        <Typography style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+        <Typography
+          style={{
+            fontSize: "1.3rem",
+            fontWeight: "bold",
+            marginLeft: false ? "0" : "2  rem",
+          }}
+        >
           YOUR PRRTIES
         </Typography>
         {false ? (
@@ -43,7 +49,7 @@ const PrrtySection = () => {
             You're not in any PRRTIES yet!
           </Typography>
         ) : (
-          <Box>
+          <Box marginLeft="2rem">
             {[1, 2, 3, 4, 5, 6, 7].map((val) => (
               <PrrtyBox />
             ))}
