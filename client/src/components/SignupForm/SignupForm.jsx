@@ -13,8 +13,10 @@ import styled from "styled-components";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+//import axios from "axios"
+import { sendUserData } from "../../actions/sendUserData"
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -44,6 +46,7 @@ const validationSchema = yup.object({
 
 const SignupForm = () => {
   const theme = useTheme();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const { signup } = useAuth();
   const formik = useFormik({
@@ -55,15 +58,18 @@ const SignupForm = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      try {
-        alert(JSON.stringify(values, null, 2));
-
-        await signup(values.email, values.password);
-        setLoading(false);
-      }
-      catch {
-        console.log("error");
-      }
+        await signup(values.email, values.password)
+        .then((user) => {
+          setLoading(false);
+          const data = {
+            email: values.email,
+            userId: user.user.uid,
+            username: values.username
+          }
+          console.log(data)
+          sendUserData(data, history);
+        })
+        .catch(err => console.log(err))
     },
   });
 
