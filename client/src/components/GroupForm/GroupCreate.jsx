@@ -5,6 +5,7 @@ import PrrtySidebar from "../Prrty/PrrtySidebar";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "./Group.css";
+import { useTheme } from "@material-ui/core/styles";
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 const validationSchema = yup.object({
@@ -26,13 +27,12 @@ const validationSchema = yup.object({
     .string("Enter a name for your transaction")
     .min(3, "Transaction name should be of minimum 3 characters in length")
     .required("Transaction name is required"),
-  transactionAmount: yup
-    .number("Enter a transaction amount")
-    .moreThan(0, "Transaction amount should be more than $0")
-    .required("Transaction amount is required"),
+  transactionValue: yup
+    .number("Enter a transaction value")
+    .moreThan(0, "Transaction value should be more than $0")
+    .required("Transaction value is required"),
   transactionDueDate: yup
     .date("Enter a transaction due date")
-    .required("Transaction due date is required")
 });
 
 const TitleBox = styled(Box)`
@@ -44,7 +44,7 @@ const DetailBox = styled(Box)`
 `
 
 const GroupCreate = () => {
-
+  const theme = useTheme();
   // Prompt values for group details
   const formik = useFormik({
     initialValues: {
@@ -52,8 +52,8 @@ const GroupCreate = () => {
       bankBSB: "",
       bankNumber: "",
       transactionName: "",
-      transactionAmount: 0,
-      transactionDueDate: "",
+      transactionValue: 0,
+      transactionDueDate: new Date(),
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -71,7 +71,7 @@ const GroupCreate = () => {
               variant="h2"
               style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
             >
-              Whats your PRRTY name?
+              What's your PRRTY name?
             </Typography>
             <TextField 
               id="groupName"
@@ -92,14 +92,9 @@ const GroupCreate = () => {
             >
               What account will the members pay to?
             </Typography>
-            <DetailBox className="detailBox">
-              <Typography 
-                style={{ fontSize: "1.2em", fontWeight: "bold", marginTop: "1rem" }}
-              >
-                BSB
-              </Typography>
+            <DetailBox>
               <TextField
-                style={{ width: "15%"}}
+                style={{ width: "15%", marginTop: "2rem"}}
                 label="BSB Number"
                 type="text"
                 placeholder="BSB Number"
@@ -115,11 +110,6 @@ const GroupCreate = () => {
               />
             </DetailBox>
             <DetailBox>
-              <Typography 
-                  style={{ fontSize: "1.2em", fontWeight: "bold", marginTop: "1rem" }}
-                >
-                  Account Number
-              </Typography>
               <TextField
                 style={{ marginTop: "0.75rem", width: "40%"}}
                 label="Bank Account Number"
@@ -154,11 +144,6 @@ const GroupCreate = () => {
               <span>Psst, you can add more of these later!</span>
             </div>
             <DetailBox>
-              <Typography 
-                  style={{ fontSize: "1.2em", fontWeight: "bold", marginTop: "1rem" }}
-                >
-                  Transaction Name
-              </Typography>
               <TextField
                 style={{ marginTop: "0.75rem", width: "40%"}}
                 label="Transaction Name"
@@ -176,39 +161,29 @@ const GroupCreate = () => {
               />
             </DetailBox>
             <DetailBox>
-              <Typography 
-                  style={{ fontSize: "1.2em", fontWeight: "bold", marginTop: "1rem" }}
-                >
-                  Transaction Amount
-              </Typography>
               <TextField
                 startAdornment={<InputAdornment position="start">$</InputAdornment>}
                 style={{ marginTop: "0.75rem", width: "40%"}}
-                label="Transaction Amount"
+                label="Transaction Value"
                 type="number"
-                placeholder="Transaction Amount"
-                id="transactionAmount"
-                value={formik.values.transactionAmount}
+                placeholder="Transaction Value"
+                id="transactionValue"
+                value={formik.values.transactionValue}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.transactionAmount && Boolean(formik.errors.transactionAmount)
+                  formik.touched.transactionValue && Boolean(formik.errors.transactionValue)
                 }
-                helperText={formik.touched.transactionAmount && formik.errors.transactionAmount}
+                helperText={formik.touched.transactionValue && formik.errors.transactionValue}
                 fullWidth
                 required
               />
             </DetailBox>
             <DetailBox>
-              <Typography 
-                  style={{ fontSize: "1.2em", fontWeight: "bold", marginTop: "1rem" }}
-                >
-                  Transaction Due Date
-              </Typography>
               <TextField
                 style={{ marginTop: "0.75rem", width: "40%"}}
-                label="Transaction DueDate"
-                type="text"
-                placeholder="Transaction DueDate"
+                type="date"
+                label="Due Date"
+                InputLabelProps={{ shrink: true }}
                 id="transactionDueDate"
                 value={formik.values.transactionDueDate}
                 onChange={formik.handleChange}
@@ -221,24 +196,26 @@ const GroupCreate = () => {
               />
             </DetailBox>
           </TitleBox>
-          <Button
-            //disabled={loading}
-            type="submit"
-            fullWidth
-            className="transaction-button"
-            style={{ marginTop: "1rem" }}
-          >
-            Add Transaction
-          </Button>
-          <Button
-            //disabled={loading}
-            type="submit"
-            fullWidth
-            className="party-share-button"
-            style={{ marginTop: "1rem" }}
-          >
-            Start Sharing!
-          </Button>
+          <TitleBox display="flex" flexDirection="row">
+            <Button
+              color="primary"
+              type="submit"
+              fullWidth
+              className="transaction-button"
+              style={{ marginTop: "1rem" }}
+            >
+              Add Transaction
+            </Button>
+            <Button
+              color="primary"
+              type="submit"
+              fullWidth
+              className="party-share-button"
+              style={{ marginTop: "1rem" }}
+            >
+              Start Sharing!
+            </Button>
+          </TitleBox>
         </form>
       </Box>
     </Box>

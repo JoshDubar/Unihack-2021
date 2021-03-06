@@ -23,11 +23,11 @@ const ContainerBox = styled(Box)`
   height: 100vh;
 `;
 const InviteForm = () => {
-  const value = "Joshua"
-  const groupName = "Yep Code"
+  const value = "joshdubz"
+  const groupName = "YepCode"
   const theme = useTheme();
   return (
-    <ContainerBox bgcolor={theme.palette.primary.main}>
+    <ContainerBox >
       <Grid>
         <Paper
           elevation={10}
@@ -46,7 +46,7 @@ const InviteForm = () => {
                 style={{ fontSize: "1em", fontWeight: 200, marginTop: "1rem" }}
                 weight
               >
-                You have been invited to {value}'s group
+                {value} has invited you to share with
               </Typography>
               <Typography
                 variant="h1"
@@ -63,7 +63,7 @@ const InviteForm = () => {
               fullWidth
               style={{ marginTop: "1rem" }}
             >
-              Accept Invite
+              JOIN THIS PRRTY
             </Button>
           </Grid>
         </Paper>

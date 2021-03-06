@@ -25,7 +25,7 @@ const LoginForm = () => {
   const theme = useTheme();
   // const { login } = useAuth();
   return (
-    <ContainerBox bgcolor={theme.palette.primary.main}>
+    <ContainerBox >
       <Grid>
         <Paper
           elevation={10}
