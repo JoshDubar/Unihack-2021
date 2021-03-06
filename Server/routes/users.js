@@ -12,4 +12,7 @@ router.get('/', function(req, res, next) {
 //Make new user
 router.post('/', usersController.RegisterUser);
 
+//Return all the groups for a user
+router.get('/:id',usersController.ReturnAllGroups);
+
 module.exports = router;

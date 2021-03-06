@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
 const ServicesSchema = mongoose.Schema({
-    cost: Number,
+    value: Number,
     name : String,
     isRecurring : Boolean,
+    due : {
+        type : Date,
+        default : Date.now
+    }
 });
 
 const MembersSchema = mongoose.Schema({
@@ -11,14 +15,17 @@ const MembersSchema = mongoose.Schema({
     paid : {
         type : Boolean,
         default : false
-    }
+    },
+    _id : mongoose.Schema.Types.ObjectID
 });
 
 const GroupSchema = mongoose.Schema({
-    host : String, 
-    link : String,
+    host : String,
+    name : String, 
     service : [ServicesSchema],
-    members : [MembersSchema]
+    members : [MembersSchema],
+    accountNum : Number,
+    bsb : Number
 });
 
 module.exports = mongoose.model('Groups', GroupSchema);
