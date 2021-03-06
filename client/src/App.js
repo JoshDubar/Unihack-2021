@@ -6,6 +6,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import LoginForm from "./components/LoginForm/LoginForm";
 import SignupForm from "./components/SignupForm/SignupForm";
 import InviteForm from "./components/InviteForm/InviteForm";
+import GroupCreate from "./components/GroupForm/GroupCreate"
 import PrrtyHome from "./components/Prrty/PrrtyHome";
 import Home from "./components/Home";
 import theme from "./theme";
@@ -21,6 +22,7 @@ function App() {
             <Route path="/signup" component={SignupForm} />
             <Route path="/home" component={PrrtyHome} />
             <Route path="/invite/:id" component={InviteForm} />
+            <Route path="/create/:id" component={GroupCreate} />>
           </Box>
         </Router>
       </ThemeProvider>
