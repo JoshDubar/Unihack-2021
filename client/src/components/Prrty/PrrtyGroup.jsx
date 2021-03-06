@@ -1,15 +1,17 @@
 import React from "react";
 import { Box, Grid, Typography } from "@material-ui/core";
 import PrrtyGroupMember from "./PrrtyGroupMember";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 const PrrtyHome = () => {
   return (
     <Box padding="0 10rem" height="100vh" width="100%">
       <Grid
         container
-        spacing={6}
+        spacing={10}
         alignItems="center"
-        style={{ height: "100vh" }}
+        style={{ height: "100vh", overflow: "hidden" }}
       >
         <Grid item xs={6} style={{ height: "70%" }}>
           <Box
@@ -30,7 +32,7 @@ const PrrtyHome = () => {
           </Box>
         </Grid>
         <Grid item xs={6} style={{ height: "70%" }}>
-          <Box border="1px solid black" height="100%">
+          <Box height="100%">
             <Box
               display="flex"
               flexDirection="row"
@@ -47,14 +49,22 @@ const PrrtyHome = () => {
               >
                 Prrty Members
               </Typography>
-              <Typography style={{ fontSize: "1rem", fontWeight: "bold" }}>
+              <Typography
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  paddingRight: "1rem",
+                }}
+              >
                 <i>Amount owed</i>
               </Typography>
             </Box>
 
-            {[1, 2, 3, 4].map((name) => (
-              <PrrtyGroupMember key={`member__${name}`} />
-            ))}
+            <PerfectScrollbar>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((user) => (
+                <PrrtyGroupMember user={user} key={`member__${user}`} />
+              ))}
+            </PerfectScrollbar>
           </Box>
         </Grid>
       </Grid>

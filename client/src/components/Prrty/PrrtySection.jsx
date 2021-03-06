@@ -5,20 +5,20 @@ import PrrtyBox from "./PrrtyBox";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
-const StyledScrollBar = styled(PerfectScrollbar)`
-  color: ${(props) => props.theme.palette.secondary.main};
-  background: ${(props) => props.theme.palette.primary.main};
-  & .ps__thumb-y,
-  .ps__thumb-y:hover {
-    background-color: ${(props) => props.theme.palette.secondary.main};
-  }
-`;
-
 const PrrtySection = () => {
   const theme = useTheme();
-  console.log(theme);
+
+  const StyledScrollBar = styled(PerfectScrollbar)`
+    color: ${theme.palette.secondary.main};
+    background: ${theme.palette.primary.main};
+    & .ps__thumb-y,
+    .ps__thumb-y:hover {
+      background-color: ${theme.palette.secondary.main};
+    }
+  `;
+
   return (
-    <StyledScrollBar theme={theme} options={{ suppressScrollX: true }}>
+    <StyledScrollBar options={{ suppressScrollX: true }}>
       <Box
         id="your-prrties"
         width="100%"
