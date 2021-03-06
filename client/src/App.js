@@ -22,7 +22,7 @@ function App() {
             <Route path="/signup" component={SignupForm} />
             <Route path="/home" component={PrrtyHome} />
             <Route path="/invite/:id" component={InviteForm} />
-            <Route path="/create/:id" component={GroupCreate} />>
+            <Route path="/create/:id" component={GroupCreate} />
           </Box>
         </Router>
       </ThemeProvider>
