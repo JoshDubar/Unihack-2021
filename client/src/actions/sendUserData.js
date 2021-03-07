@@ -23,11 +23,17 @@ export const sendUserData = (user, history, updateUser) => {
 /**
  * @body: userId
  */
-export const retrieveUserData = (user, history) => {
+export const retrieveUserData = (userId, history, updateUser) => {
   axios
-    .get(`${URL}/user/userData`, user)
+    .get(`${URL}/users/${userId}`)
     .then((res) => {
       console.log("res", res);
+      const { data } = res;
+      if (data) {
+        const { email, username, groups, _id: userId } = data;
+        updateUser({ email, username, groups, userId });
+        history.push("/home");
+      }
     })
     .catch((err) => {
       console.log(err.message);

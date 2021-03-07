@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import PrrtySidebar from "./PrrtySidebar";
 import PrrtyGroup from "./PrrtyGroup";
 import NoPrrties from "./NoPrrties";
-const PrrtyHome = (props) => {
-  console.log(props);
+const PrrtyHome = ({ groups }) => {
+  console.log(groups);
   return (
     <Box display="flex" flexDirection="row">
       <PrrtySidebar />
-      {props.groups.length === 0 ? <NoPrrties /> : <PrrtyGroup />}
+      {groups.length === 0 ? <NoPrrties /> : <PrrtyGroup />}
     </Box>
   );
 };
