@@ -15,8 +15,8 @@ import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-//import axios from "axios"
-import { sendUserData } from "../../actions/sendUserData"
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { sendUserData } from "../../actions/sendUserData";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -48,6 +48,7 @@ const SignupForm = () => {
   const theme = useTheme();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const { signup } = useAuth();
   const formik = useFormik({
     initialValues: {
@@ -58,20 +59,38 @@ const SignupForm = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-        await signup(values.email, values.password)
+      await signup(values.email, values.password)
         .then((user) => {
           setLoading(false);
           const data = {
             email: values.email,
             userId: user.user.uid,
-            username: values.username
-          }
-          console.log(data)
+            username: values.username,
+          };
+          setError(false);
+          console.log(data);
           sendUserData(data, history);
         })
-        .catch(err => console.log(err))
+        .catch(() => {
+          setError(true);
+        });
     },
   });
+
+  const ErrorAlert = () => (
+    <Alert
+      severity="error"
+      style={{
+        marginTop: "1rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: "0 !important",
+      }}
+    >
+      <AlertTitle>Email already in use</AlertTitle>
+    </Alert>
+  );
 
   return (
     <ContainerBox>
@@ -89,6 +108,7 @@ const SignupForm = () => {
             <Avatar>
               <LockOutlinedIcon />
             </Avatar>
+            {error && <ErrorAlert />}
             <Typography
               variant="h1"
               style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}

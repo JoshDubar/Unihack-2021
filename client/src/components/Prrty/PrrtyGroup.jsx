@@ -23,6 +23,7 @@ const PrrtyHome = () => {
             flexDirection="column"
             alignItems="center"
             padding="0 2rem"
+            position="relative"
           >
             <Box marginTop="-5rem">
               <Avatar
@@ -52,7 +53,7 @@ const PrrtyHome = () => {
               <Typography>dinner @ dragon hot pot</Typography>
               <Typography>$52.00</Typography>
             </Box>
-            <Box width="100%" alignSelf="flex-end" marginTop="7rem">
+            <Box width="80%" position="absolute" bottom="1rem" left="1rem" right="1rem">
               <hr
                 style={{ marginTop: "1rem", width: "100%" }}
                 variant="middle"

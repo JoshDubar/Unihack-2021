@@ -10,13 +10,12 @@ import {
 } from "@material-ui/core";
 import styled from "styled-components";
 import { useFormik } from "formik";
+import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { Link } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
-import axios from "axios"
-// import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -31,17 +30,30 @@ const validationSchema = yup.object({
     .string("Enter email")
     .email("Enter a valid email")
     .required("Email is required"),
-  password: yup
-    .string("Enter password")
-    .min(8, "Password should be of minimum 8 characters in length")
-    .required("Password is required"),
+  password: yup.string("Enter password").required("Password is required"),
 });
 
 const LoginForm = () => {
   const theme = useTheme();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const { login, currentUser } = useAuth();
+  const [error, setError] = useState(false);
+  const { login } = useAuth();
+
+  const ErrorAlert = () => (
+    <Alert
+      severity="error"
+      style={{
+        marginTop: "1rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: "0 !important",
+      }}
+    >
+      <AlertTitle>Login Unsuccessful</AlertTitle>
+    </Alert>
+  );
 
   const formik = useFormik({
     initialValues: {
@@ -51,19 +63,19 @@ const LoginForm = () => {
     validationSchema,
     onSubmit: async (values) => {
       await login(values.email, values.password)
-      .then(() => {
-        alert(JSON.stringify(values, null, 2));
-        setError("");
-        setLoading(false);
-      })
-      .catch(err => setError("There is no user account with this email")
-      )
+        .then(() => {
+          setError(false);
+          setLoading(false);
+          history.push("/home");
+        })
+        .catch(() => {
+          setError(true);
+        });
     },
   });
 
-
   return (
-    <ContainerBox >
+    <ContainerBox>
       <Grid>
         <Paper
           elevation={10}
@@ -78,6 +90,7 @@ const LoginForm = () => {
             <Avatar>
               <LockOutlinedIcon />
             </Avatar>
+            {error && <ErrorAlert />}
             <Typography
               variant="h1"
               style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
@@ -92,9 +105,7 @@ const LoginForm = () => {
                   id="email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.email && Boolean(formik.errors.email)
-                  }
+                  error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
                   fullWidth
                   required
