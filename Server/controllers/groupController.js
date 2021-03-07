@@ -87,6 +87,27 @@ exports.PaymentMade = async function(req,res){
     }
 }
 
+exports.EditAmountToPay = async function(req,res){
+    const userId = req.body.memberId;
+    const groupId = req.body.groupId;
+    const amountToPay = req.body.amountToPay;
+    try{
+        const doc = await Group.findOne({_id : groupId});
+        doc.members.forEach((member) => {
+            if (!!member._id && member._id == userId){
+                console.log(member);
+                member.amountToPay = amountToPay;
+            }
+        })
+        delete doc._id;
+        const amountEdited = await Group.updateOne({_id : groupId}, {$set : doc});
+        res.json(amountEdited);
+
+    }catch(err){
+        res.json({message : err})
+    }
+}
+
 
 
 

@@ -35,6 +35,7 @@ exports.ReturnAllGroups = async function(req,res){
     const userID = req.body.userId;
     try{
         const userGroups = await User.findById(userID);
+        console.log(userGroups)
         res.json(userGroups.groups);
     }
     catch(err){
