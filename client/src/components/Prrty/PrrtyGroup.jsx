@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Grid,
@@ -11,6 +11,8 @@ import PrrtyGroupMember from "./PrrtyGroupMember";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+
+const URL = "http://localhost:5000/";
 
 const PrrtyHome = () => {
   const theme = useTheme();
@@ -96,10 +98,11 @@ const PrrtyHome = () => {
             </Box>
           </Box>
           <CopyToClipboard
-            onCopy={() => setCopy(true)}
+            onCopy={() => setCopied(true)}
             text={"http://localhost:3001/invite"}
           >
             <Button
+              variant="contained"
               style={{
                 backgroundColor: theme.palette.secondary.main,
                 borderRadius: 9999,
@@ -111,7 +114,7 @@ const PrrtyHome = () => {
                 margin: "1rem",
               }}
             >
-              CREATE A PRRTY INVITE
+              CREATE A PRRTY INVITE LINK
             </Button>
           </CopyToClipboard>
         </Grid>

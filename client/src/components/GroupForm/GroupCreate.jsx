@@ -169,9 +169,11 @@ const GroupCreate = () => {
             </DetailBox>
             <DetailBox>
               <TextField
-                startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
-                }
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
                 style={{ marginTop: "0.75rem", width: "40%" }}
                 label="Transaction Value"
                 type="number"
