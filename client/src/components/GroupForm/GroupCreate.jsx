@@ -4,7 +4,6 @@ import { Box, Typography, TextField, Button } from "@material-ui/core";
 import PrrtySidebar from "../Prrty/PrrtySidebar";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useTheme } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { connect } from "react-redux";
 import { Redirect, useHistory } from "react-router";
@@ -48,7 +47,6 @@ const DetailBox = styled(Box)`
 `;
 
 const GroupCreate = ({ createGroup, user, updateUser }) => {
-  const theme = useTheme();
   const history = useHistory();
   const { currentUser } = useAuth();
   // Prompt values for group details
@@ -184,9 +182,11 @@ const GroupCreate = ({ createGroup, user, updateUser }) => {
             </DetailBox>
             <DetailBox>
               <TextField
-                startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
-                }
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
                 style={{ marginTop: "0.75rem", width: "40%" }}
                 label="Transaction Value"
                 type="number"

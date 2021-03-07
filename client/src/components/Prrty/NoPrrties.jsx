@@ -12,6 +12,7 @@ const NoPrrties = ({ setPrrties }) => {
       </Typography>
       <Link to="/create" style={{ textDecoration: "none" }}>
         <Button
+          variant="contained"
           style={{
             backgroundColor: theme.palette.secondary.main,
             borderRadius: 9999,

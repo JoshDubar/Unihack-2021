@@ -1,11 +1,22 @@
-import React from "react";
-import { Box, Grid, Typography, Avatar, useTheme } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+  Box,
+  Grid,
+  Typography,
+  Avatar,
+  useTheme,
+  Button,
+} from "@material-ui/core";
 import PrrtyGroupMember from "./PrrtyGroupMember";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
+const URL = "http://localhost:5000/";
 
 const PrrtyGroup = () => {
   const theme = useTheme();
+  const [copied, setCopied] = useState(false);
   return (
     <Box padding="0 10rem" height="100vh" width="100%">
       <Grid
@@ -23,6 +34,7 @@ const PrrtyGroup = () => {
             flexDirection="column"
             alignItems="center"
             padding="0 2rem"
+            position="relative"
           >
             <Box marginTop="-5rem">
               <Avatar
@@ -52,7 +64,13 @@ const PrrtyGroup = () => {
               <Typography>dinner @ dragon hot pot</Typography>
               <Typography>$52.00</Typography>
             </Box>
-            <Box width="100%" alignSelf="flex-end" marginTop="7rem">
+            <Box
+              width="80%"
+              position="absolute"
+              bottom="1rem"
+              left="1rem"
+              right="1rem"
+            >
               <hr
                 style={{ marginTop: "1rem", width: "100%" }}
                 variant="middle"
@@ -79,6 +97,26 @@ const PrrtyGroup = () => {
               </Box>
             </Box>
           </Box>
+          <CopyToClipboard
+            onCopy={() => setCopied(true)}
+            text={"http://localhost:3001/invite"}
+          >
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: theme.palette.secondary.main,
+                borderRadius: 9999,
+                padding: "1rem",
+                color: "white",
+                fontWeight: "bold",
+                width: "100%",
+                fontSize: "1rem",
+                margin: "1rem",
+              }}
+            >
+              CREATE A PRRTY INVITE LINK
+            </Button>
+          </CopyToClipboard>
         </Grid>
         <Grid item xs={6} style={{ height: "70%" }}>
           <Box height="100%">

@@ -16,6 +16,7 @@ import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { Alert, AlertTitle } from "@material-ui/lab";
 //import axios from "axios"
 import { sendUserData } from "../../actions/sendUserData";
 
@@ -49,6 +50,7 @@ const SignupForm = ({ updateUser }) => {
   const theme = useTheme();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const { signup } = useAuth();
   const formik = useFormik({
     initialValues: {
@@ -67,12 +69,29 @@ const SignupForm = ({ updateUser }) => {
             userId: user.user.uid,
             username: values.username,
           };
-          console.log(data);
+          setError(false);
           sendUserData(data, history, updateUser);
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          setError(true);
+        });
     },
   });
+
+  const ErrorAlert = () => (
+    <Alert
+      severity="error"
+      style={{
+        marginTop: "1rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: "0 !important",
+      }}
+    >
+      <AlertTitle>Email already in use</AlertTitle>
+    </Alert>
+  );
 
   return (
     <ContainerBox>
@@ -90,6 +109,7 @@ const SignupForm = ({ updateUser }) => {
             <Avatar>
               <LockOutlinedIcon />
             </Avatar>
+            {error && <ErrorAlert />}
             <Typography
               variant="h1"
               style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}
