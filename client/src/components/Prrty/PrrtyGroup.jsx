@@ -4,7 +4,7 @@ import PrrtyGroupMember from "./PrrtyGroupMember";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
-const PrrtyHome = () => {
+const PrrtyGroup = () => {
   const theme = useTheme();
   return (
     <Box padding="0 10rem" height="100vh" width="100%">
@@ -121,4 +121,4 @@ const PrrtyHome = () => {
   );
 };
 
-export default PrrtyHome;
+export default PrrtyGroup;
