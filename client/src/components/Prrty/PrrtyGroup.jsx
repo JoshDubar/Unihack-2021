@@ -45,11 +45,11 @@ const PrrtyGroup = () => {
                   backgroundColor: theme.palette.primary.main,
                 }}
               >
-                P
+                J
               </Avatar>
             </Box>
             <Typography style={{ fontSize: "2rem", fontWeight: "bold" }}>
-              Prrty Group Name
+              YepCode
             </Typography>
             <Typography>
               <i>where we share</i>
@@ -147,11 +147,11 @@ const PrrtyGroup = () => {
               </Typography>
             </Box>
 
-            <PerfectScrollbar>
+            {/* <PerfectScrollbar>
               {[1, 2, 3, 4, 5, 6, 7, 8].map((user) => (
                 <PrrtyGroupMember user={user} key={`member__${user}`} />
               ))}
-            </PerfectScrollbar>
+            </PerfectScrollbar> */}
           </Box>
         </Grid>
       </Grid>
