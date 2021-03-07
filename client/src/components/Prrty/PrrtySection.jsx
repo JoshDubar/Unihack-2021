@@ -31,7 +31,7 @@ const PrrtySection = () => {
           style={{
             fontSize: "1.3rem",
             fontWeight: "bold",
-            marginLeft: false ? "0" : "2  rem",
+            marginLeft: true ? "0" : "2  rem",
           }}
         >
           YOUR PRRTIES

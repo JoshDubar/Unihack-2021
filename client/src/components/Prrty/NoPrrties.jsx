@@ -21,7 +21,6 @@ const NoPrrties = ({ setPrrties }) => {
             width: "25rem",
             fontSize: "1.5rem",
           }}
-          onClick={() => setPrrties((prrties) => [...prrties, "prrty"])}
         >
           CREATE A PRRTY
         </Button>
