@@ -14,7 +14,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const URL = "http://localhost:5000/";
 
-const PrrtyHome = () => {
+const PrrtyGroup = () => {
   const theme = useTheme();
   const [copied, setCopied] = useState(false);
   return (
@@ -159,4 +159,4 @@ const PrrtyHome = () => {
   );
 };
 
-export default PrrtyHome;
+export default PrrtyGroup;

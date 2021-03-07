@@ -4,11 +4,12 @@ import { useTheme } from "@material-ui/core/styles";
 import Logo from "../../images/LogoYellow.png";
 import styled from "styled-components";
 import PrrtySection from "./PrrtySection";
+import { connect } from "react-redux";
 
 const LogoImage = styled.img`
   width: 100%;
 `;
-const Prrty = () => {
+const PrrtySidebar = ({ groups, user }) => {
   const theme = useTheme();
   return (
     <Box
@@ -36,7 +37,7 @@ const Prrty = () => {
         <Avatar
           style={{ backgroundColor: theme.palette.avatar.main, zIndex: 1 }}
         >
-          J
+          {user.username.charAt(0).toUpperCase}
         </Avatar>
         <Box
           bgcolor="white"
@@ -56,12 +57,25 @@ const Prrty = () => {
           whiteSpace="nowrap"
           textOverflow="ellipsis"
         >
-          <Typography>Prrty user</Typography>
+          <Typography>{user.username}</Typography>
         </Box>
       </Box>
-      <PrrtySection />
+      <PrrtySection groups={groups} />
     </Box>
   );
 };
 
-export default Prrty;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeColor: (color, index) =>
+      dispatch({ type: "CHANGE_COLOR", payload: { color, index } }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrrtySidebar);

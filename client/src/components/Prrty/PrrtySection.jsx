@@ -5,7 +5,7 @@ import PrrtyBox from "./PrrtyBox";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
-const PrrtySection = () => {
+const PrrtySection = ({ groups }) => {
   const theme = useTheme();
 
   const StyledScrollBar = styled(PerfectScrollbar)`
@@ -31,12 +31,12 @@ const PrrtySection = () => {
           style={{
             fontSize: "1.3rem",
             fontWeight: "bold",
-            marginLeft: false ? "0" : "2  rem",
+            marginLeft: true ? "0" : "2  rem",
           }}
         >
           YOUR PRRTIES
         </Typography>
-        {false ? (
+        {groups.length === 0 ? (
           <Typography
             style={{
               margin: "1rem 0 0 0",
@@ -50,7 +50,7 @@ const PrrtySection = () => {
           </Typography>
         ) : (
           <Box marginLeft="2rem">
-            {[1, 2, 3, 4, 5, 6, 7].map((val) => (
+            {groups.map((val) => (
               <PrrtyBox />
             ))}
           </Box>

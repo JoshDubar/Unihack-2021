@@ -9,6 +9,7 @@ import {
   Button,
   useTheme,
 } from "@material-ui/core";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -16,6 +17,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { Alert, AlertTitle } from "@material-ui/lab";
+//import axios from "axios"
 import { sendUserData } from "../../actions/sendUserData";
 
 const ContainerBox = styled(Box)`
@@ -44,7 +46,7 @@ const validationSchema = yup.object({
     .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
-const SignupForm = () => {
+const SignupForm = ({ updateUser }) => {
   const theme = useTheme();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -68,8 +70,7 @@ const SignupForm = () => {
             username: values.username,
           };
           setError(false);
-          console.log(data);
-          sendUserData(data, history);
+          sendUserData(data, history, updateUser);
         })
         .catch(() => {
           setError(true);
@@ -208,4 +209,17 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    ...state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUser: (user) => dispatch({ type: "SIGNUP", payload: user }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);

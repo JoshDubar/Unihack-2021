@@ -10,12 +10,14 @@ import {
 } from "@material-ui/core";
 import styled from "styled-components";
 import { useFormik } from "formik";
-import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useTheme } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { retrieveUserData } from "../../actions/sendUserData";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -33,12 +35,12 @@ const validationSchema = yup.object({
   password: yup.string("Enter password").required("Password is required"),
 });
 
-const LoginForm = () => {
+const LoginForm = ({ updateUser }) => {
   const theme = useTheme();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
 
   const ErrorAlert = () => (
     <Alert
@@ -66,6 +68,7 @@ const LoginForm = () => {
         .then(() => {
           setError(false);
           setLoading(false);
+          retrieveUserData(currentUser.uid, history, updateUser);
           history.push("/home");
         })
         .catch(() => {
@@ -155,4 +158,16 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUser: (user) => dispatch({ type: "LOGIN", payload: user }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
