@@ -44,13 +44,12 @@ export const retrieveUserData = (userId, history, updateUser) => {
 /**
  * @body userId
  */
-export const retrieveUserGroups = (user, history) => {
-  axios
-    .get(`${URL}/user/returnAllGroups`, user)
-    .then((res) => {
-      console.log("res", res);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+export const retrieveUserGroups = async (userId) => {
+  try {
+    const res = await axios.get(`${URL}/users/returnAllGroups/${userId}`);
+    console.log(res);
+    return res.data;
+  } catch (e) {
+    console.log(e);
+  }
 };

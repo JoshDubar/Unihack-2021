@@ -32,7 +32,7 @@ exports.ReturnUserData = async function (req, res) {
 
 //Returning all the groups the user is in
 exports.ReturnAllGroups = async function (req, res) {
-  const userID = req.body.userId;
+  const userID = req.params.userId;
   try {
     const userGroups = await User.findById(userID);
     console.log(userGroups);

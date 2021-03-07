@@ -30,6 +30,7 @@ function App() {
               <Route path="/signup" component={SignupForm} />
               <Route path="/home" component={PrrtyHome} />
               <Route path="/invite/:id" component={InviteForm} />
+              <Route path="/group/:id" component={PrrtyHome} />
               <Route path="/create" component={GroupCreate} />
             </Box>
           </Router>

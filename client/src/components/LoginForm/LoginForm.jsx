@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
 import { connect } from "react-redux";
@@ -60,8 +60,7 @@ const LoginForm = ({ updateUser }) => {
         .catch((err) => setError("There is no user account with this email"));
     },
   });
-
-  return (
+  return !currentUser ? (
     <ContainerBox>
       <Grid>
         <Paper
@@ -138,6 +137,8 @@ const LoginForm = ({ updateUser }) => {
         </Paper>
       </Grid>
     </ContainerBox>
+  ) : (
+    <Redirect to="/home" />
   );
 };
 

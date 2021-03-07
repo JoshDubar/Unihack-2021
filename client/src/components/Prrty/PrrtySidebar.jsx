@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Avatar } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import Logo from "../../images/LogoYellow.png";
 import styled from "styled-components";
 import PrrtySection from "./PrrtySection";
 import { connect } from "react-redux";
+import { retrieveUserGroups } from "../../actions/sendUserData";
+import { useHistory } from "react-router";
 
 const LogoImage = styled.img`
   width: 100%;
 `;
 const PrrtySidebar = ({ groups, user }) => {
+  const history = useHistory();
+  const [userGroups, setUserGroups] = useState([]);
+  useEffect(() => {
+    if (!userGroups) {
+      const getUserGroups = async () => {
+        const data = await retrieveUserGroups(user.uid);
+        setUserGroups(data);
+      };
+      getUserGroups();
+    }
+  }, [userGroups, user]);
+  console.log(userGroups);
   const theme = useTheme();
   return (
     <Box
@@ -37,7 +51,7 @@ const PrrtySidebar = ({ groups, user }) => {
         <Avatar
           style={{ backgroundColor: theme.palette.avatar.main, zIndex: 1 }}
         >
-          {user.username.charAt(0).toUpperCase}
+          {user.username.charAt(0).toUpperCase()}
         </Avatar>
         <Box
           bgcolor="white"

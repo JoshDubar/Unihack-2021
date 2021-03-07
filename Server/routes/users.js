@@ -15,6 +15,6 @@ router.post("/", usersController.RegisterUser);
 router.get("/:userId", usersController.ReturnUserData);
 
 //Return all the groups for a user
-router.get("/returnAllGroups", usersController.ReturnAllGroups);
+router.get("/returnAllGroups/:userId", usersController.ReturnAllGroups);
 
 module.exports = router;

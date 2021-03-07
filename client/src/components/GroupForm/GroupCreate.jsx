@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Box, Typography, TextField, Button } from "@material-ui/core";
 import PrrtySidebar from "../Prrty/PrrtySidebar";
@@ -6,6 +6,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTheme } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { connect } from "react-redux";
+import { Redirect, useHistory } from "react-router";
+import { createNewGroup } from "../../actions/group";
+import { useAuth } from "../../contexts/AuthContext";
+import { retrieveUserData } from "../../actions/sendUserData";
 
 const validationSchema = yup.object({
   groupName: yup
@@ -42,8 +47,10 @@ const DetailBox = styled(Box)`
   margin: 0.5rem 0 0 0.2rem;
 `;
 
-const GroupCreate = () => {
+const GroupCreate = ({ createGroup, user, updateUser }) => {
   const theme = useTheme();
+  const history = useHistory();
+  const { currentUser } = useAuth();
   // Prompt values for group details
   const formik = useFormik({
     initialValues: {
@@ -55,12 +62,18 @@ const GroupCreate = () => {
       transactionDueDate: new Date(),
     },
     validationSchema,
-    onSubmit: async (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (groupInfo) => {
+      createNewGroup(groupInfo, user, history, createGroup);
     },
   });
 
-  return (
+  useEffect(() => {
+    if (currentUser && !user.username) {
+      retrieveUserData(currentUser.uid, history, updateUser);
+    }
+  }, [currentUser, history, updateUser, user]);
+
+  return currentUser ? (
     <Box display="flex" flexDirection="row">
       <PrrtySidebar />
       <Box width="100%">
@@ -234,7 +247,23 @@ const GroupCreate = () => {
         </form>
       </Box>
     </Box>
+  ) : (
+    <Redirect to="/" />
   );
 };
 
-export default GroupCreate;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createGroup: (groupInfo) =>
+      dispatch({ type: "CREATE_GROUP", payload: groupInfo }),
+    updateUser: (user) => dispatch({ type: "LOGIN", payload: user }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GroupCreate);
