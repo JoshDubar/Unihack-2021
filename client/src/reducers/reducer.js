@@ -1,5 +1,5 @@
 const defaultState = {
-  user: { username: "", userId: "", email: "" },
+  user: { username: "", userId: "", email: "", groups: [] },
   groups: [],
   activeGroup: undefined,
 };
@@ -14,8 +14,8 @@ const reducer = (state = defaultState, action) => {
           username,
           userId,
           email,
+          groups,
         },
-        groups,
       };
     }
 
@@ -27,13 +27,24 @@ const reducer = (state = defaultState, action) => {
           username,
           userId,
           email,
+          groups,
         },
-        groups,
       };
     }
 
-    case "CLICK_NEW_GROUP":
-      break;
+    case "CREATE_GROUP": {
+      const { _id: groupId, host, name } = action.payload;
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          groups: [
+            ...state.user.groups,
+            { groupId, isHost: host === state.user.username, name },
+          ],
+        },
+      };
+    }
 
     default:
       return state;

@@ -10,7 +10,7 @@ const NoPrrties = ({ setPrrties }) => {
       <Typography style={{ position: "relative", top: "-2rem" }}>
         Oh no, you don't have anyone to share with! :(
       </Typography>
-      <Link to="/home" style={{ textDecoration: "none" }}>
+      <Link to="/create" style={{ textDecoration: "none" }}>
         <Button
           variant="contained"
           style={{
