@@ -4,7 +4,6 @@ import { Box, Typography, TextField, Button } from "@material-ui/core";
 import PrrtySidebar from "../Prrty/PrrtySidebar";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useTheme } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 const validationSchema = yup.object({
@@ -43,7 +42,6 @@ const DetailBox = styled(Box)`
 `;
 
 const GroupCreate = () => {
-  const theme = useTheme();
   // Prompt values for group details
   const formik = useFormik({
     initialValues: {
@@ -171,9 +169,11 @@ const GroupCreate = () => {
             </DetailBox>
             <DetailBox>
               <TextField
-                startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
-                }
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
                 style={{ marginTop: "0.75rem", width: "40%" }}
                 label="Transaction Value"
                 type="number"

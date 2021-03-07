@@ -12,9 +12,10 @@ import styled from "styled-components";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { Link, useHistory } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { retrieveUserData } from "../../actions/sendUserData";
 
@@ -31,18 +32,30 @@ const validationSchema = yup.object({
     .string("Enter email")
     .email("Enter a valid email")
     .required("Email is required"),
-  password: yup
-    .string("Enter password")
-    .min(8, "Password should be of minimum 8 characters in length")
-    .required("Password is required"),
+  password: yup.string("Enter password").required("Password is required"),
 });
 
 const LoginForm = ({ updateUser }) => {
   const theme = useTheme();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const { login, currentUser } = useAuth();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const { login, currentUser } = useAuth();
+
+  const ErrorAlert = () => (
+    <Alert
+      severity="error"
+      style={{
+        marginTop: "1rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: "0 !important",
+      }}
+    >
+      <AlertTitle>Login Unsuccessful</AlertTitle>
+    </Alert>
+  );
 
   const formik = useFormik({
     initialValues: {
@@ -53,11 +66,14 @@ const LoginForm = ({ updateUser }) => {
     onSubmit: async (values) => {
       await login(values.email, values.password)
         .then(() => {
-          setError("");
+          setError(false);
           setLoading(false);
           retrieveUserData(currentUser.uid, history, updateUser);
+          history.push("/home");
         })
-        .catch((err) => setError("There is no user account with this email"));
+        .catch(() => {
+          setError(true);
+        });
     },
   });
 
@@ -77,6 +93,7 @@ const LoginForm = ({ updateUser }) => {
             <Avatar>
               <LockOutlinedIcon />
             </Avatar>
+            {error && <ErrorAlert />}
             <Typography
               variant="h1"
               style={{ fontSize: "2em", fontWeight: "bold", marginTop: "1rem" }}

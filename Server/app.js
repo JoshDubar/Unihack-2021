@@ -22,13 +22,17 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 mongoose.connect(
-  process.env.MONGO_PASSWORD,
-  { useUnifiedTopology: true, useNewUrlParser: true },
+  process.env.MONGO_PASSWORD, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  },
 
   () => console.log("connected to DB!")
 );
